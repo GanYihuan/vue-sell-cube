@@ -12,7 +12,7 @@ import {
   Scroll,
   Slide,
   ScrollNav,
-  ScrollNavBar,
+  ScrollNavBar
 } from 'cube-ui'
 
 Vue.use(TabBar)
