@@ -51,11 +51,11 @@
       drop (el) {
         this.$refs.shopCart.drop(el)
       },
-    },
+    }
   }
 </script>
-<style lang="stylus" scoped>
 
+<style lang="stylus" scoped>
   .shop-cart-sticky
     position absolute
     left 0
