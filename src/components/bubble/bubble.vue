@@ -4,15 +4,16 @@
 
 <script>
 export default {
-  name: "bubble",
+  name: 'bubble',
   props: {
     num: {
       type: Number,
       default: 0
     }
   }
-};
+}
 </script>
+
 <style lang="stylus" scoped>
 @import '~assets/stylus/variable';
 

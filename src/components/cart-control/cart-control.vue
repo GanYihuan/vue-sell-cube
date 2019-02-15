@@ -11,15 +11,15 @@
 </template>
 
 <script>
-const EVENT_ADD = "add";
+const EVENT_ADD = 'add'
 
 export default {
-  name: "cart-control",
+  name: 'cart-control',
   props: {
     food: {
       type: Object,
       default() {
-        return {};
+        return {}
       }
     }
   },
@@ -27,19 +27,19 @@ export default {
     add(event) {
       if (!this.food.count) {
         // 向响应式对象中添加一个属性，并确保这个新属性同样是响应式的，且触发视图更新。
-        this.$set(this.food, "count", 1);
+        this.$set(this.food, 'count', 1)
       } else {
-        this.food.count++;
+        this.food.count++
       }
-      this.$emit(EVENT_ADD, event.target);
+      this.$emit(EVENT_ADD, event.target)
     },
     decrease() {
       if (this.food.count) {
-        this.food.count--;
+        this.food.count--
       }
     }
   }
-};
+}
 </script>
 
 <style lang="stylus" scoped>
