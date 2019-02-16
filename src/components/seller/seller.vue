@@ -84,16 +84,16 @@ import { saveToLocal, loadFromLocal } from 'utils/storage'
 
 export default {
   name: 'seller',
+  components: {
+    Split,
+    Star,
+    SupportIco
+  },
   props: {
     data: Object,
     default() {
       return {}
     }
-  },
-  components: {
-    Split,
-    Star,
-    SupportIco
   },
   computed: {
     seller() {

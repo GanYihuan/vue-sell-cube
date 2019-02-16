@@ -75,20 +75,15 @@ import ApiServer from 'api'
 export default {
   name: 'ratings',
   mixins: [RatingMixin],
-  props: {
-    data: Object,
-    default() {
-      return {}
-    }
-  },
   components: {
     Star,
     RatingSelect,
     Split
   },
-  computed: {
-    seller() {
-      return this.data.seller || {}
+  props: {
+    data: Object,
+    default() {
+      return {}
     }
   },
   data() {
@@ -98,6 +93,11 @@ export default {
         click: false,
         directionLockThreshold: 0
       }
+    }
+  },
+  computed: {
+    seller() {
+      return this.data.seller || {}
     }
   },
   methods: {

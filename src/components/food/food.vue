@@ -99,11 +99,6 @@ export default {
     RatingSelect,
     Split
   },
-  computed: {
-    ratings() {
-      return this.food.ratings
-    }
-  },
   data() {
     return {
       desc: {
@@ -119,6 +114,11 @@ export default {
         this.$refs.scroll.refresh()
       })
     })
+  },
+  computed: {
+    ratings() {
+      return this.food.ratings
+    }
   },
   methods: {
     afterLeave() {

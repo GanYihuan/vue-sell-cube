@@ -74,6 +74,7 @@ export default {
   }
 }
 </script>
+
 <style lang="stylus" scoped>
 #app {
   .tab-wrapper {
