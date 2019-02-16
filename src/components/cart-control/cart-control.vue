@@ -31,9 +31,11 @@ export default {
       } else {
         this.food.count++
       }
+      // event.target -> dom
       this.$emit(EVENT_ADD, event.target)
     },
     decrease() {
+      // if this.food.count > 0 invoked
       if (this.food.count) {
         this.food.count--
       }

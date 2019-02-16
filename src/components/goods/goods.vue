@@ -56,7 +56,6 @@
         </cube-scroll-nav-panel>
       </cube-scroll-nav>
     </div>
-
     <div class="shop-cart-wrapper">
       <shop-cart
         ref="shopCart"
@@ -156,6 +155,7 @@ export default {
       this._showShopCartSticky()
     },
     // 购物车添加
+    // target -> dom
     onAdd(target) {
       this.$refs.shopCart.drop(target)
     },

@@ -3,10 +3,10 @@
     <cube-popup
       mask-closable
       v-show="visible"
-      @mask-click="maskClick"
       position="bottom"
       type="shop-cart-list"
       :z-index="90"
+      @mask-click="maskClick"
     >
       <transition name="move" @after-leave="afterLeave">
         <div v-show="visible">
@@ -44,6 +44,9 @@ const EVENT_LEAVE = 'leave'
 export default {
   name: 'shop-cart-list',
   mixins: [popupMixin],
+  components: {
+    CartControl
+  },
   props: {
     selectFoods: {
       type: Array,
@@ -51,9 +54,6 @@ export default {
         return []
       }
     }
-  },
-  components: {
-    CartControl
   },
   created() {
     // 购物车列表显示刷新滚动

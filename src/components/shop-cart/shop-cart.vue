@@ -45,6 +45,9 @@ function createBalls() {
 
 export default {
   name: 'shop-cart',
+  components: {
+    Bubble
+  },
   props: {
     selectFoods: {
       type: Array,
@@ -69,8 +72,14 @@ export default {
       default: false
     }
   },
-  components: {
-    Bubble
+  data() {
+    return {
+      balls: createBalls(),
+      listFold: this.fold
+    }
+  },
+  created() {
+    this.dropBalls = []
   },
   computed: {
     totalPrice() {
@@ -105,17 +114,7 @@ export default {
       }
     }
   },
-  data() {
-    return {
-      balls: createBalls(),
-      listFold: this.fold
-    }
-  },
-  created() {
-    this.dropBalls = []
-  },
   methods: {
-    // 支付
     pay(e) {
       if (this.totalPrice < this.minPrice) return
       this.$createDialog({
@@ -124,6 +123,7 @@ export default {
       }).show()
       e.stopPropagation()
     },
+    // el -> click position
     drop(el) {
       for (let i = 0; i < this.balls.length; i++) {
         const ball = this.balls[i]
@@ -138,14 +138,16 @@ export default {
     beforeDrop(el) {
       const ball = this.dropBalls[this.dropBalls.length - 1]
       const rect = ball.el.getBoundingClientRect()
-      const x = rect.left - 32 // 运动的x值
-      const y = -(window.innerHeight - rect.top - 22) // 运动的y值
+      const x = rect.left - 32
+      // ball shoot center in shopcart icon center, fourth quadrant
+      const y = -(window.innerHeight - rect.top - 22)
       el.style.display = ''
       el.style.transform = el.style.webkitTransform = `translate3d(0,${y}px,0)`
       const inner = el.getElementsByClassName(innerClsHook)[0]
       inner.style.transform = inner.style.webkitTransform = `translate3d(${x}px,0,0)`
     },
     dropping(el, done) {
+      // redraw
       this._reflow = document.body.offsetHeight
       el.style.transform = el.style.webkitTransform = `translate3d(0,0,0)`
       const inner = el.getElementsByClassName(innerClsHook)[0]
