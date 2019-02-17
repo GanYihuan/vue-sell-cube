@@ -43,6 +43,10 @@ import SupportIco from 'components/support-ico/support-ico'
 export default {
   name: 'header-detail',
   mixins: [popupMixin],
+  components: {
+    Star,
+    SupportIco
+  },
   props: {
     seller: {
       type: Object,
@@ -50,10 +54,6 @@ export default {
         return {}
       }
     }
-  },
-  components: {
-    Star,
-    SupportIco
   }
 }
 </script>
