@@ -22,6 +22,16 @@ export default {
     VHeader,
     Tab
   },
+  data() {
+    return {
+      seller: {
+        id: qs.parse(location.search.slice(1)).id
+      }
+    }
+  },
+  created() {
+    this._getSeller()
+  },
   computed: {
     tabs() {
       return [
@@ -49,18 +59,7 @@ export default {
       ]
     }
   },
-  data() {
-    return {
-      seller: {
-        id: qs.parse(location.search.slice(1)).id
-      }
-    }
-  },
-  created() {
-    this._getSeller()
-  },
   methods: {
-    // 获取商家信息
     _getSeller() {
       let params = {
         id: this.seller.id
