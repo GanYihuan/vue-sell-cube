@@ -55,9 +55,7 @@
                   </div>
                   <div class="time">{{format(rating.rateTime)}}</div>
                   <p class="text">
-                    <span
-                      :class="{'icon-thumb_up':rating.rateType===0,'icon-thumb_down':rating.rateType===1}"
-                    ></span>
+                    <span :class="{'icon-thumb_up':rating.rateType===0,'icon-thumb_down':rating.rateType===1}"></span>
                     {{rating.text}}
                   </p>
                 </li>
@@ -86,6 +84,11 @@ const EVENT_LEAVE = 'leave'
 export default {
   name: 'food',
   mixins: [popupMixin, ratingMixin],
+  components: {
+    CartControl,
+    RatingSelect,
+    Split
+  },
   props: {
     food: {
       type: Object,
@@ -93,11 +96,6 @@ export default {
         return {}
       }
     }
-  },
-  components: {
-    CartControl,
-    RatingSelect,
-    Split
   },
   data() {
     return {
