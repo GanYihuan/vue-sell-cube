@@ -63,10 +63,12 @@ export default {
       type: Number,
       default: 0
     },
+    // 显示 & 隐藏
     fold: {
       type: Boolean,
       default: true
     },
+    // 区分 购物车浮层 & 购物车层
     sticky: {
       type: Boolean,
       default: false
@@ -123,7 +125,7 @@ export default {
       }).show()
       e.stopPropagation()
     },
-    // el -> click position
+    // el -> dom
     drop(el) {
       for (let i = 0; i < this.balls.length; i++) {
         const ball = this.balls[i]
@@ -220,11 +222,12 @@ export default {
     }
   },
   watch: {
+    // 根据 fold 作改变
     fold(newVal) {
       this.listFold = newVal
     },
     totalCount(count) {
-      // 购物车列表展开的情况 价格为0
+      // 购物车列表展开的情况 价格为 0
       if (!this.fold && count === 0) {
         this._hideShopCartList()
       }

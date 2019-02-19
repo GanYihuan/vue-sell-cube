@@ -26,7 +26,7 @@ export default {
   methods: {
     add(event) {
       if (!this.food.count) {
-        // 向响应式对象中添加一个属性，并确保这个新属性同样是响应式的，且触发视图更新。
+        // 向对象中添加一个属性，并确保这个新属性同样是响应式的，且触发视图更新。
         this.$set(this.food, 'count', 1)
       } else {
         this.food.count++

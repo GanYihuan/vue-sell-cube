@@ -78,12 +78,6 @@ import ApiServer from 'api'
 
 export default {
   name: 'goods',
-  props: {
-    data: Object,
-    default() {
-      return {}
-    }
-  },
   components: {
     Bubble,
     SupportIco,
@@ -91,11 +85,18 @@ export default {
     ShopCart,
     Food
   },
+  props: {
+    data: Object,
+    default() {
+      return {}
+    }
+  },
   data() {
     return {
       goods: [],
       selectedFood: {},
       scrollOptions: {
+        // 造成点击两次
         click: false,
         directionLockThreshold: 0
       }
@@ -134,7 +135,6 @@ export default {
     }
   },
   methods: {
-    // 获取商品
     fetch() {
       if (!this.fetched) {
         this.fetched = true
@@ -148,18 +148,15 @@ export default {
           .catch(err => {})
       }
     },
-    // 选择商品
     selectFood(food) {
       this.selectedFood = food
       this._showFood()
       this._showShopCartSticky()
     },
-    // 购物车添加
-    // target -> dom
     onAdd(target) {
+      // target -> dom
       this.$refs.shopCart.drop(target)
     },
-    // 显示商品详情页
     _showFood() {
       this.foodComp =
         this.foodComp ||
