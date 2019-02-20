@@ -101,16 +101,16 @@ export default {
     }
   },
   methods: {
-    // 获取评价信息
     fetch() {
       if (!this.fetched) {
         this.fetched = true
         let params = {
           id: this.seller.id
         }
-        ApiServer.getRatings(params).then(res => {
-          this.ratings = res
-        })
+        ApiServer.getRatings(params)
+          .then(res => {
+            this.ratings = res
+          })
       }
     },
     format(time) {

@@ -95,14 +95,6 @@ export default {
       return {}
     }
   },
-  computed: {
-    seller() {
-      return this.data.seller || {}
-    },
-    favoriteText() {
-      return this.favorite ? '已收藏' : '收藏'
-    }
-  },
   data() {
     return {
       favorite: false,
@@ -119,6 +111,14 @@ export default {
   },
   created() {
     this.favorite = loadFromLocal(this.seller.id, 'favorite', false)
+  },
+  computed: {
+    seller() {
+      return this.data.seller || {}
+    },
+    favoriteText() {
+      return this.favorite ? '已收藏' : '收藏'
+    }
   },
   methods: {
     toggleFavorite() {
