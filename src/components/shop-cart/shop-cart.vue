@@ -141,7 +141,7 @@ export default {
       const ball = this.dropBalls[this.dropBalls.length - 1]
       const rect = ball.el.getBoundingClientRect()
       const x = rect.left - 32
-      // ball shoot center in shopcart icon center, fourth quadrant
+      // ball shoot center in shopcart icon center, fourth quadrant, right x+, down y+
       const y = -(window.innerHeight - rect.top - 22)
       el.style.display = ''
       el.style.transform = el.style.webkitTransform = `translate3d(0,${y}px,0)`

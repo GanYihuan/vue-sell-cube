@@ -51,6 +51,7 @@ export default {
       // onScroll(pos) 能获得 pos.x 等信息
       slideOptions: {
         listenScroll: true,
+        // 0 不派发scroll事件，1：非实时；2：滑动过程中；3：不仅在屏幕滑动的过程中，而且momentum 滚动动画运行过程中实时派发
         probeType: 3,
         directionLockThreshold: 0
       }
@@ -72,6 +73,7 @@ export default {
     }
   },
   methods: {
+    // 先获取tabBar和slide的宽度，然后获取到滚动位置的坐标值，坐标值/slideWidth得到滚动的比例，然后*tabBarWidth,实时得到
     onScroll(pos) {
       const tabBarWidth = this.$refs.tabBar.$el.clientWidth
       // slide: better-scroll obj
