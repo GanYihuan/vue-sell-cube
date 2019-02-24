@@ -191,7 +191,6 @@ export default {
               this.listFold = true
             },
             add: el => {
-              // 购物车列表小球滚动
               this.shopCartStickyComp.drop(el)
             }
           }
