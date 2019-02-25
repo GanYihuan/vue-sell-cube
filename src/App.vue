@@ -64,6 +64,7 @@ export default {
       let params = {
         id: this.seller.id
       }
+      // 传递 id => seller?id=2
       ApiServer.getSeller(params)
         .then(res => {
           this.seller = Object.assign({}, this.seller, res)

@@ -10,7 +10,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 // gzip压缩插件
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 
-function resolve (dir) {
+function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
@@ -39,23 +39,19 @@ module.exports = {
           compress: {
             warnings: false,
             drop_debugger: true,
-            drop_console: true,
-          },
+            drop_console: true
+          }
         },
         sourceMap: false,
-        parallel: true,
+        parallel: true
       }),
       new CompressionWebpackPlugin({
         filename: '[path].gz[query]',
         algorithm: 'gzip',
-        test: new RegExp(
-          '\\.(' +
-          ['js', 'css'].join('|') +
-          ')$',
-        ),
+        test: new RegExp('\\.(' + ['js', 'css'].join('|') + ')$'),
         threshold: 10240,
-        minRatio: 0.8,
-      }),
+        minRatio: 0.8
+      })
     ]
     if (process.env.NODE_ENV !== 'development') {
       config.plugins = [...config.plugins, ...plugins]
@@ -68,8 +64,9 @@ module.exports = {
       .set('components', resolve('src/components'))
       .set('utils', resolve('src/utils'))
     // 处理moment加载多个语言文件问题
-    config.plugin('context').use(webpack.ContextReplacementPlugin,
-      [/moment[/\\]locale$/, /zh-cn/])
+    config
+      .plugin('context')
+      .use(webpack.ContextReplacementPlugin, [/moment[/\\]locale$/, /zh-cn/])
   },
   // css相关配置
   css: {
@@ -78,11 +75,9 @@ module.exports = {
     loaderOptions: {
       stylus: {
         'resolve url': true,
-        'import': [
-          './src/theme',
-        ],
-      },
-    },
+        import: ['./src/theme']
+      }
+    }
   },
   // webpack-dev-server 相关配置
   devServer: {
@@ -96,22 +91,22 @@ module.exports = {
       app.get('/api/seller', (req, res) => {
         res.json({
           status: 1,
-          data: seller,
+          data: seller
         })
       })
       app.get('/api/goods', (req, res) => {
         res.json({
           status: 1,
-          data: goods,
+          data: goods
         })
       })
       app.get('/api/ratings', (req, res) => {
         res.json({
           status: 1,
-          data: ratings,
+          data: ratings
         })
       })
-    },
+    }
   },
   // enabled by default if the machine has more than 1 cores
   parallel: require('os').cpus().length > 1,
@@ -121,7 +116,7 @@ module.exports = {
   pluginOptions: {
     'cube-ui': {
       postCompile: true,
-      theme: true,
-    },
-  },
+      theme: true
+    }
+  }
 }
