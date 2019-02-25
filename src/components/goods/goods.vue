@@ -70,7 +70,6 @@
 <script>
 import CartControl from 'components/cart-control/cart-control'
 import ShopCart from 'components/shop-cart/shop-cart'
-import Food from 'components/food/food'
 import SupportIco from 'components/support-ico/support-ico'
 import Bubble from 'components/bubble/bubble'
 
@@ -82,8 +81,7 @@ export default {
     Bubble,
     SupportIco,
     CartControl,
-    ShopCart,
-    Food
+    ShopCart
   },
   props: {
     data: Object,
