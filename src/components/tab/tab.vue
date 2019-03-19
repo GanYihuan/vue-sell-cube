@@ -73,11 +73,12 @@ export default {
     }
   },
   methods: {
-    // 先获取tabBar和slide的宽度，然后获取到滚动位置的坐标值，坐标值/slideWidth得到滚动的比例，然后*tabBarWidth,实时得到
+    // 先获取 tabBar 和 slide 的宽度，然后获取到滚动位置的坐标值，坐标值 / slideWidth 得到滚动的比例，然后 * tabBarWidth, 实时得到
     onScroll(pos) {
       const tabBarWidth = this.$refs.tabBar.$el.clientWidth
       // slide: better-scroll obj
       const slideWidth = this.$refs.slide.slide.scrollerWidth
+      // pos.x slideOptions 配置了才能获得
       const transform = (-pos.x / slideWidth) * tabBarWidth
       this.$refs.tabBar.setSliderTransform(transform)
     },
