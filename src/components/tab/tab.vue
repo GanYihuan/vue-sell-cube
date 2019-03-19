@@ -23,7 +23,7 @@
         @change="onChange"
       >
         <cube-slide-item
-          v-for="(tab,index) in tabs"
+          v-for="(tab, index) in tabs"
           :key="index"
         >
           <component

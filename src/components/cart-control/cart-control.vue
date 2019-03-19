@@ -38,17 +38,14 @@ export default {
   methods: {
     add(event) {
       if (!this.food.count) {
-        // 向对象中添加一个属性，并确保这个新属性同样是响应式的，且触发视图更新。
-        this.$set(this.food, 'count', 1)
+        this.$set(this.food, 'count', 1) // 向对象中添加一个属性，并确保这个新属性同样是响应式的，且触发视图更新。
       } else {
         this.food.count++
       }
-      // event.target -> dom
-      this.$emit(EVENT_ADD, event.target)
+      this.$emit(EVENT_ADD, event.target) // event.target -> dom
     },
     decrease() {
-      // if this.food.count > 0 invoked
-      if (this.food.count) {
+      if (this.food.count) { // if this.food.count > 0 invoked
         this.food.count--
       }
     }

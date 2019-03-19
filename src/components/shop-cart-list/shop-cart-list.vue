@@ -1,5 +1,9 @@
 <template>
   <transition name="fade">
+    <!-- mask 是否显示背景层 -->
+    <!-- position 内容展示位置，优先级比 center 高 -->
+    <!-- type 弹层类型 -->
+    <!-- @mask-click 背景层点击 -->
     <cube-popup
       v-show="visible"
       mask-closable
@@ -74,8 +78,7 @@ export default {
     }
   },
   created() {
-    // 购物车列表显示刷新滚动
-    this.$on(EVENT_SHOW, () => {
+    this.$on(EVENT_SHOW, () => { // 购物车列表显示刷新滚动
       this.$nextTick(() => {
         this.$refs.listContent.refresh()
       })

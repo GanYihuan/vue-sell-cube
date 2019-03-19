@@ -1,6 +1,7 @@
 <template>
   <div class="goods">
     <div class="scroll-nav-wrapper">
+      <!-- side 是否是侧边样式 -->
       <cube-scroll-nav
         v-if="goods.length"
         side
@@ -11,6 +12,9 @@
           slot="bar"
           slot-scope="props"
         >
+          <!-- labels 所有的 key 值集合 -->
+          <!-- txts 显示所有文案集合，和 labels 一一对应，每项可以是 HTML 字符串 -->
+          <!-- current 当前 active 的 key 值 -->
           <cube-scroll-nav-bar
             direction="vertical"
             :labels="props.labels"
@@ -35,6 +39,8 @@
             </template>
           </cube-scroll-nav-bar>
         </template>
+        <!-- label 必须，面板的唯一标示的值 -->
+        <!-- title 面板标题内容，可以是 HTML 字符串 -->
         <cube-scroll-nav-panel
           v-for="good in goods"
           :key="good.name"

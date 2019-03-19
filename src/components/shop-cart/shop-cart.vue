@@ -44,7 +44,7 @@
     </div>
     <div class="ball-container">
       <div
-        v-for="(ball,index) in balls"
+        v-for="(ball, index) in balls"
         :key="index"
       >
         <transition
@@ -52,6 +52,7 @@
           @enter="dropping"
           @after-enter="afterDrop"
         >
+          <!-- x axis, y axis -->
           <div
             v-show="ball.show"
             class="ball"
@@ -98,13 +99,11 @@ export default {
       type: Number,
       default: 0
     },
-    // 显示 & 隐藏
-    fold: {
+    fold: { // show & hide
       type: Boolean,
       default: true
     },
-    // 区分 购物车浮层 & 购物车层
-    sticky: {
+    sticky: { // distinguish Shopping cart float layer & Shopping cart layer
       type: Boolean,
       default: false
     }
@@ -149,13 +148,11 @@ export default {
     }
   },
   watch: {
-    // 根据 fold 作改变
-    fold(newVal) {
+    fold(newVal) { // 根据 fold 作改变
       this.listFold = newVal
     },
     totalCount(count) {
-      // 购物车列表展开的情况 价格为 0
-      if (!this.fold && count === 0) {
+      if (!this.fold && count === 0) { // 购物车列表展开的情况 价格为 0
         this._hideShopCartList()
       }
     }
@@ -172,8 +169,7 @@ export default {
       }).show()
       e.stopPropagation()
     },
-    // el -> dom
-    drop(el) {
+    drop(el) { // el -> dom
       for (let i = 0; i < this.balls.length; i++) {
         const ball = this.balls[i]
         if (!ball.show) {
@@ -188,30 +184,27 @@ export default {
       const ball = this.dropBalls[this.dropBalls.length - 1]
       const rect = ball.el.getBoundingClientRect()
       const x = rect.left - 32
-      // ball shoot center in shopcart icon center, fourth quadrant, right x+, down y+
-      const y = -(window.innerHeight - rect.top - 22)
-      el.style.display = ''
+      const y = -(window.innerHeight - rect.top - 22) // ball shoot center in shopcart icon center, fourth quadrant, right x+, down y+
+      el.style.display = '' // style show ball
       el.style.transform = el.style.webkitTransform = `translate3d(0,${y}px,0)`
-      const inner = el.getElementsByClassName(innerClsHook)[0]
+      const inner = el.getElementsByClassName(innerClsHook)[0] // Inner element
       inner.style.transform = inner.style.webkitTransform = `translate3d(${x}px,0,0)`
     },
     dropping(el, done) {
-      // redraw
-      this._reflow = document.body.offsetHeight
+      this._reflow = document.body.offsetHeight // redraw
       el.style.transform = el.style.webkitTransform = `translate3d(0,0,0)`
       const inner = el.getElementsByClassName(innerClsHook)[0]
       inner.style.transform = el.style.webkitTransform = `translate3d(0,0,0)`
       el.addEventListener('transitionend', done)
     },
-    afterDrop(el) {
+    afterDrop(el) { // recycling
       const ball = this.dropBalls.shift()
       if (ball) {
         ball.show = false
         el.style.display = 'none'
       }
     },
-    // 切换购物车列表
-    toggleList() {
+    toggleList() { // 切换购物车列表
       if (this.listFold) {
         if (!this.totalCount) return
         this.listFold = false
@@ -222,8 +215,7 @@ export default {
         this._hideShopCartList()
       }
     },
-    // 显示购物车列表
-    _showShopCartList() {
+    _showShopCartList() { // Show shopping cart list
       this.shopCartListComp =
         this.shopCartListComp ||
         this.$createShopCartList({
@@ -248,8 +240,7 @@ export default {
       const list = this.sticky ? this.$parent.list : this.shopCartListComp
       list.hide && list.hide()
     },
-    // 显示购物车浮层
-    _showShopCartSticky() {
+    _showShopCartSticky() { // Show shopping cart float layer
       this.shopCartStickyComp =
         this.shopCartStickyComp ||
         this.$createShopCartSticky({
