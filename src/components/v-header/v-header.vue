@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     showDetail() {
-      // cube-ui 的create-api 把 headerdetail 组件变成了 api 实例,所以可以这样实例调用 this.$createHeaderDetail
+      // cube-ui 的 create-api 把 headerdetail 组件变成了 api 实例,所以可以这样实例调用 this.$createHeaderDetail
       this.headerDetailComp =
         this.headerDetailComp ||
         this.$createHeaderDetail({
