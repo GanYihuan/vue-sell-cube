@@ -183,8 +183,7 @@ export default {
       this._showShopCartSticky()
     },
     onAdd(target) {
-      // target -> dom
-      this.$refs.shopCart.drop(target)
+      this.$refs.shopCart.drop(target) // target -> dom
     },
     _showFood() {
       this.foodComp =
@@ -204,8 +203,7 @@ export default {
         })
       this.foodComp.show()
     },
-    // 显示购物车浮层
-    _showShopCartSticky() {
+    _showShopCartSticky() { // 显示购物车浮层
       this.shopCartStickyComp =
         this.shopCartStickyComp ||
         this.$createShopCartSticky({
