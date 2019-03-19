@@ -1,12 +1,24 @@
 <template>
   <div class="cart-control">
     <transition name="move">
-      <div class="cart-decrease" v-show="food.count>0" @click.stop="decrease">
-        <span class="inner icon-remove_circle_outline"></span>
+      <div
+        v-show="food.count>0"
+        class="cart-decrease"
+        @click.stop="decrease"
+      >
+        <span class="inner icon-remove_circle_outline" />
       </div>
     </transition>
-    <div class="cart-count" v-show="food.count>0">{{food.count}}</div>
-    <div class="cart-add icon-add_circle" @click.stop="add"></div>
+    <div
+      v-show="food.count>0"
+      class="cart-count"
+    >
+      {{ food.count }}
+    </div>
+    <div
+      class="cart-add icon-add_circle"
+      @click.stop="add"
+    />
   </div>
 </template>
 
@@ -14,7 +26,7 @@
 const EVENT_ADD = 'add'
 
 export default {
-  name: 'cart-control',
+  name: 'CartControl',
   props: {
     food: {
       type: Object,

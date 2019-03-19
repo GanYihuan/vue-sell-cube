@@ -1,32 +1,56 @@
 <template>
-  <div class="header" @click="showDetail">
+  <div
+    class="header"
+    @click="showDetail"
+  >
     <div class="content-wrapper">
       <div class="avatar">
-        <img width="64" height="64" :src="seller.avatar" alt>
+        <img
+          width="64"
+          height="64"
+          :src="seller.avatar"
+          alt
+        >
       </div>
       <div class="content">
         <div class="title">
-          <span class="brand"></span>
-          <span class="name">{{seller.name}}</span>
+          <span class="brand" />
+          <span class="name">{{ seller.name }}</span>
         </div>
-        <div class="description">{{seller.description}}/{{seller.deliveryTime}}分钟送达</div>
-        <div class="support" v-if="seller.supports">
-          <support-ico :size="1" :type="seller.supports[0].type"/>
-          <span class="textr">{{seller.supports[0].description}}</span>
+        <div class="description">
+          {{ seller.description }}/{{ seller.deliveryTime }}分钟送达
         </div>
-        <div class="support-count" v-if="seller.supports">
-          <span class="count">{{seller.supports.length}}个</span>
-          <i class="icon-keyboard_arrow_right"></i>
+        <div
+          v-if="seller.supports"
+          class="support"
+        >
+          <support-ico
+            :size="1"
+            :type="seller.supports[0].type"
+          />
+          <span class="textr">{{ seller.supports[0].description }}</span>
+        </div>
+        <div
+          v-if="seller.supports"
+          class="support-count"
+        >
+          <span class="count">{{ seller.supports.length }}个</span>
+          <i class="icon-keyboard_arrow_right" />
         </div>
       </div>
     </div>
     <div class="bulletin-wrapper">
-      <span class="bulletin-title"></span>
-      <span class="bulletin-text">{{seller.bulletin}}</span>
-      <i class="icon-keyboard_arrow_right"></i>
+      <span class="bulletin-title" />
+      <span class="bulletin-text">{{ seller.bulletin }}</span>
+      <i class="icon-keyboard_arrow_right" />
     </div>
     <div class="background">
-      <img width="100%" height="100%" :src="seller.avatar" alt>
+      <img
+        width="100%"
+        height="100%"
+        :src="seller.avatar"
+        alt
+      >
     </div>
   </div>
 </template>
@@ -35,7 +59,7 @@
 import SupportIco from 'components/support-ico/support-ico'
 
 export default {
-  name: 'v-header',
+  name: 'VHeader',
   components: {
     SupportIco
   },

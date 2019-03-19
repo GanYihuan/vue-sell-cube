@@ -1,8 +1,11 @@
 <template>
   <div id="app">
-    <v-header :seller="seller"/>
+    <v-header :seller="seller" />
     <div class="tab-wrapper">
-      <tab :tabs="tabs" :initialIndex="0"/>
+      <tab
+        :tabs="tabs"
+        :initial-index="0"
+      />
     </div>
   </div>
 </template>
@@ -17,7 +20,7 @@ import qs from 'qs'
 import ApiServer from 'api'
 
 export default {
-  name: 'app',
+  name: 'App',
   components: {
     VHeader,
     Tab
@@ -28,9 +31,6 @@ export default {
         id: qs.parse(location.search.slice(1)).id
       }
     }
-  },
-  created() {
-    this._getSeller()
   },
   computed: {
     tabs() {
@@ -59,9 +59,12 @@ export default {
       ]
     }
   },
+  created() {
+    this._getSeller()
+  },
   methods: {
     _getSeller() {
-      let params = {
+      const params = {
         id: this.seller.id
       }
       // 传递 id => seller?id=2
@@ -69,7 +72,7 @@ export default {
         .then(res => {
           this.seller = Object.assign({}, this.seller, res)
         })
-        .catch(err => {})
+        .catch(err => { console.log(err) })
     }
   }
 }

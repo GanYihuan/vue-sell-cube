@@ -1,21 +1,37 @@
 <template>
   <div class="rating-select">
     <div class="rating-type border-bottom-1px">
-      <span class="block positive" @click="select(2)" :class="{'active':selectType===2}">
-        {{desc.all}}
-        <span class="count">{{ratings.length}}</span>
+      <span
+        class="block positive"
+        :class="{'active':selectType===2}"
+        @click="select(2)"
+      >
+        {{ desc.all }}
+        <span class="count">{{ ratings.length }}</span>
       </span>
-      <span class="block positive" @click="select(0)" :class="{'active':selectType===0}">
-        {{desc.positive}}
-        <span class="count">{{positives.length}}</span>
+      <span
+        class="block positive"
+        :class="{'active':selectType===0}"
+        @click="select(0)"
+      >
+        {{ desc.positive }}
+        <span class="count">{{ positives.length }}</span>
       </span>
-      <span class="block negative" @click="select(1)" :class="{'active':selectType===1}">
-        {{desc.negative}}
-        <span class="count">{{negatives.length}}</span>
+      <span
+        class="block negative"
+        :class="{'active':selectType===1}"
+        @click="select(1)"
+      >
+        {{ desc.negative }}
+        <span class="count">{{ negatives.length }}</span>
       </span>
     </div>
-    <div @click="toggleContent" class="switch" :class="{'on':onlyContent}">
-      <span class="icon-check_circle"></span>
+    <div
+      class="switch"
+      :class="{'on':onlyContent}"
+      @click="toggleContent"
+    >
+      <span class="icon-check_circle" />
       <span class="text">只看有内容的评价</span>
     </div>
   </div>
@@ -30,7 +46,7 @@ const EVENT_TOGGLE = 'toggle'
 const EVENT_SELECT = 'select'
 
 export default {
-  name: 'rating-select',
+  name: 'RatingSelect',
   props: {
     ratings: {
       type: Array,

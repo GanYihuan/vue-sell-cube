@@ -1,28 +1,46 @@
 <template>
   <transition name="fade">
     <cube-popup
-      mask-closable
       v-show="visible"
+      mask-closable
       position="bottom"
       type="shop-cart-list"
       :z-index="90"
       @mask-click="maskClick"
     >
-      <transition name="move" @after-leave="afterLeave">
+      <transition
+        name="move"
+        @after-leave="afterLeave"
+      >
         <div v-show="visible">
           <div class="list-header">
-            <h1 class="title">购物车</h1>
-            <span class="empty" @click="empty">清空</span>
+            <h1 class="title">
+              购物车
+            </h1>
+            <span
+              class="empty"
+              @click="empty"
+            >清空</span>
           </div>
-          <cube-scroll class="list-content" ref="listContent">
+          <cube-scroll
+            ref="listContent"
+            class="list-content"
+          >
             <ul>
-              <li class="food" v-for="(food,index) in selectFoods" :key="index">
-                <span class="name">{{food.name}}</span>
+              <li
+                v-for="(food,index) in selectFoods"
+                :key="index"
+                class="food"
+              >
+                <span class="name">{{ food.name }}</span>
                 <div class="price">
-                  <span>￥{{food.price*food.count}}</span>
+                  <span>￥{{ food.price*food.count }}</span>
                 </div>
                 <div class="cart-control-wrapper">
-                  <cart-control :food="food" @add="onAdd"/>
+                  <cart-control
+                    :food="food"
+                    @add="onAdd"
+                  />
                 </div>
               </li>
             </ul>
@@ -42,11 +60,11 @@ const EVENT_ADD = 'add'
 const EVENT_LEAVE = 'leave'
 
 export default {
-  name: 'shop-cart-list',
-  mixins: [popupMixin],
+  name: 'ShopCartList',
   components: {
     CartControl
   },
+  mixins: [popupMixin],
   props: {
     selectFoods: {
       type: Array,

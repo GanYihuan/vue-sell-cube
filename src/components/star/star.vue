@@ -1,6 +1,14 @@
 <template>
-  <div class="star" :class="starType">
-    <span v-for="(item,index) in itemClasses" :key="index" :class="item" class="star-item"></span>
+  <div
+    class="star"
+    :class="starType"
+  >
+    <span
+      v-for="(item,index) in itemClasses"
+      :key="index"
+      :class="item"
+      class="star-item"
+    />
   </div>
 </template>
 
@@ -11,13 +19,15 @@ const CLS_HALF = 'half'
 const CLS_OFF = 'off'
 
 export default {
-  name: 'star',
+  name: 'Star',
   props: {
     size: {
-      type: Number
+      type: Number,
+      default: 0
     },
     score: {
-      type: Number
+      type: Number,
+      default: 0
     }
   },
   computed: {
@@ -25,7 +35,7 @@ export default {
       return `star-${this.size}`
     },
     itemClasses() {
-      let result = []
+      const result = []
       const score = Math.floor(this.score * 2) / 2
       const hasDecimal = score % 1 !== 0
       const integer = Math.floor(score)

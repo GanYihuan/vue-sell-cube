@@ -4,12 +4,12 @@
     <!-- showSlider 控制是否开启下划线跟随的效果 -->
     <!-- inline 来决定 icon 与 label 是否处于一行 -->
     <cube-tab-bar
-      class="border-bottom-1px"
       ref="tabBar"
-      showSlider
       v-model="selectedLabel"
+      class="border-bottom-1px"
+      show-slider
       :data="tabs"
-      :useTransition="false"
+      :use-transition="false"
     />
     <div class="slider-wrapper">
       <cube-slide
@@ -22,8 +22,15 @@
         @scroll="onScroll"
         @change="onChange"
       >
-        <cube-slide-item v-for="(tab,index) in tabs" :key="index">
-          <component ref="component" :is="tab.component" :data="tab.data"/>
+        <cube-slide-item
+          v-for="(tab,index) in tabs"
+          :key="index"
+        >
+          <component
+            :is="tab.component"
+            ref="component"
+            :data="tab.data"
+          />
         </cube-slide-item>
       </cube-slide>
     </div>
@@ -32,7 +39,7 @@
 
 <script>
 export default {
-  name: 'tab',
+  name: 'Tab',
   props: {
     tabs: {
       type: Array,
@@ -48,17 +55,12 @@ export default {
   data() {
     return {
       index: this.initialIndex,
-      // onScroll(pos) 能获得 pos.x 等信息
-      slideOptions: {
+      slideOptions: { // onScroll(pos) 能获得 pos.x 等信息
         listenScroll: true,
-        // 0 不派发scroll事件，1：非实时；2：滑动过程中；3：不仅在屏幕滑动的过程中，而且momentum 滚动动画运行过程中实时派发
-        probeType: 3,
+        probeType: 3, // 0 不派发scroll事件，1：非实时；2：滑动过程中；3：不仅在屏幕滑动的过程中，而且momentum 滚动动画运行过程中实时派发
         directionLockThreshold: 0
       }
     }
-  },
-  mounted() {
-    this.onChange(this.index)
   },
   computed: {
     selectedLabel: {
@@ -72,14 +74,14 @@ export default {
       }
     }
   },
+  mounted() {
+    this.onChange(this.index)
+  },
   methods: {
-    // 先获取 tabBar 和 slide 的宽度，然后获取到滚动位置的坐标值，坐标值 / slideWidth 得到滚动的比例，然后 * tabBarWidth, 实时得到
-    onScroll(pos) {
+    onScroll(pos) { // 先获取 tabBar 和 slide 的宽度，然后获取到滚动位置的坐标值，坐标值 / slideWidth 得到滚动的比例，然后 * tabBarWidth, 实时得到
       const tabBarWidth = this.$refs.tabBar.$el.clientWidth
-      // slide: better-scroll obj
-      const slideWidth = this.$refs.slide.slide.scrollerWidth
-      // pos.x slideOptions 配置了才能获得
-      const transform = (-pos.x / slideWidth) * tabBarWidth
+      const slideWidth = this.$refs.slide.slide.scrollerWidth // slide: better-scroll obj
+      const transform = (-pos.x / slideWidth) * tabBarWidth // pos.x slideOptions 配置了才能获得
       this.$refs.tabBar.setSliderTransform(transform)
     },
     onChange(current) {

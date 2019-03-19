@@ -1,66 +1,114 @@
 <template>
-  <transition name="move" @after-leave="afterLeave">
-    <div class="food" v-show="visible">
+  <transition
+    name="move"
+    @after-leave="afterLeave"
+  >
+    <div
+      v-show="visible"
+      class="food"
+    >
       <cube-scroll ref="scroll">
         <div class="food-content">
           <div class="image-header">
-            <img :src="food.image" alt>
-            <div class="back" @click="hide">
-              <i class="icon-arrow_lift"></i>
+            <img
+              :src="food.image"
+              alt
+            >
+            <div
+              class="back"
+              @click="hide"
+            >
+              <i class="icon-arrow_lift" />
             </div>
           </div>
           <div class="content">
-            <h1 class="title">{{food.name}}</h1>
+            <h1 class="title">
+              {{ food.name }}
+            </h1>
             <div class="detail">
-              <span class="sell-count">月售{{food.sellCount}}份</span>
-              <span class="rating">好评率{{food.rating}}%</span>
+              <span class="sell-count">月售{{ food.sellCount }}份</span>
+              <span class="rating">好评率{{ food.rating }}%</span>
             </div>
             <div class="price">
-              <span class="now">￥{{food.price}}</span>
-              <span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
+              <span class="now">￥{{ food.price }}</span>
+              <span
+                v-show="food.oldPrice"
+                class="old"
+              >￥{{ food.oldPrice }}</span>
             </div>
             <div class="cart-control-wrapper">
-              <cart-control @add="addFood" :food="food"/>
+              <cart-control
+                :food="food"
+                @add="addFood"
+              />
             </div>
             <transition name="fade">
-              <div class="buy" @click="addFirst" v-show="!food.count">加入购物车</div>
+              <div
+                v-show="!food.count"
+                class="buy"
+                @click="addFirst"
+              >
+                加入购物车
+              </div>
             </transition>
           </div>
-          <split v-show="food.info"/>
-          <div class="info" v-show="food.info">
-            <h1 class="title">商品信息</h1>
-            <p class="text">{{food.info}}</p>
+          <split v-show="food.info" />
+          <div
+            v-show="food.info"
+            class="info"
+          >
+            <h1 class="title">
+              商品信息
+            </h1>
+            <p class="text">
+              {{ food.info }}
+            </p>
           </div>
-          <split/>
+          <split />
           <div class="rating">
-            <h1 class="title">商品评价</h1>
+            <h1 class="title">
+              商品评价
+            </h1>
             <rating-select
-              @select="onSelect"
-              @toggle="onToggle"
-              :selectType="selectType"
-              :onlyContent="onlyContent"
+              :select-type="selectType"
+              :only-content="onlyContent"
               :desc="desc"
               :ratings="ratings"
+              @select="onSelect"
+              @toggle="onToggle"
             />
             <div class="rating-wrapper">
               <ul v-show="computedRatings&&computedRatings.length">
                 <li
-                  class="rating-item border-bottom-1px"
                   v-for="(rating,index) in computedRatings"
                   :key="index"
+                  class="rating-item border-bottom-1px"
                 >
                   <div class="user">
-                    <span class="name">{{rating.username}}</span>
-                    <img class="avatar" :src="rating.avatar" width="12" height="12" alt>
+                    <span class="name">{{ rating.username }}</span>
+                    <img
+                      class="avatar"
+                      :src="rating.avatar"
+                      width="12"
+                      height="12"
+                      alt
+                    >
                   </div>
-                  <div class="time">{{format(rating.rateTime)}}</div>
+                  <div class="time">
+                    {{ format(rating.rateTime) }}
+                  </div>
                   <p class="text">
-                    <span :class="{'icon-thumb_up':rating.rateType===0,'icon-thumb_down':rating.rateType===1}"></span>
-                    {{rating.text}}
+                    <span :class="{'icon-thumb_up':rating.rateType===0,'icon-thumb_down':rating.rateType===1}" />
+                    {{ rating.text }}
                   </p>
                 </li>
               </ul>
-              <div class="no-rating" v-show="!computedRatings||!computedRatings.length">暂无评价</div>
+              <div
+                v-show="!computedRatings||!computedRatings.length"
+                class="no-rating"
+              >
+                暂无评价
+              </div>
             </div>
           </div>
         </div>
@@ -82,13 +130,13 @@ const EVENT_ADD = 'add'
 const EVENT_LEAVE = 'leave'
 
 export default {
-  name: 'food',
-  mixins: [popupMixin, ratingMixin],
+  name: 'Food',
   components: {
     CartControl,
     RatingSelect,
     Split
   },
+  mixins: [popupMixin, ratingMixin],
   props: {
     food: {
       type: Object,
@@ -106,17 +154,17 @@ export default {
       }
     }
   },
+  computed: {
+    ratings() {
+      return this.food.ratings
+    }
+  },
   created() {
     this.$on(EVENT_SHOW, () => {
       this.$nextTick(() => {
         this.$refs.scroll.refresh()
       })
     })
-  },
-  computed: {
-    ratings() {
-      return this.food.ratings
-    }
   },
   methods: {
     afterLeave() {

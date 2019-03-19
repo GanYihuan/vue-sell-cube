@@ -1,27 +1,62 @@
 <template>
   <div class="shop-cart">
-    <div class="content" @click="toggleList">
+    <div
+      class="content"
+      @click="toggleList"
+    >
       <div class="content-left">
         <div class="logo-wrapper">
-          <div class="logo" :class="{'highlight':totalCount>0}">
-            <i class="icon-shopping_cart" :class="{'highlight':totalCount>0}"></i>
+          <div
+            class="logo"
+            :class="{'highlight':totalCount>0}"
+          >
+            <i
+              class="icon-shopping_cart"
+              :class="{'highlight':totalCount>0}"
+            />
           </div>
-          <div class="num" v-show="totalCount>0">
-            <bubble :num="totalCount"/>
+          <div
+            v-show="totalCount>0"
+            class="num"
+          >
+            <bubble :num="totalCount" />
           </div>
         </div>
-        <div class="price" :class="{'highlight':totalPrice>0}">￥{{totalPrice}}</div>
-        <div class="desc">另需配送费￥{{deliveryPrice}}元</div>
+        <div
+          class="price"
+          :class="{'highlight':totalPrice>0}"
+        >
+          ￥{{ totalPrice }}
+        </div>
+        <div class="desc">
+          另需配送费￥{{ deliveryPrice }}元
+        </div>
       </div>
       <div class="content-right">
-        <div class="pay" :class="payClass" @click="pay">{{payDesc}}</div>
+        <div
+          class="pay"
+          :class="payClass"
+          @click="pay"
+        >
+          {{ payDesc }}
+        </div>
       </div>
     </div>
     <div class="ball-container">
-      <div v-for="(ball,index) in balls" :key="index">
-        <transition @before-enter="beforeDrop" @enter="dropping" @after-enter="afterDrop">
-          <div class="ball" v-show="ball.show">
-            <div class="inner inner-hook"></div>
+      <div
+        v-for="(ball,index) in balls"
+        :key="index"
+      >
+        <transition
+          @before-enter="beforeDrop"
+          @enter="dropping"
+          @after-enter="afterDrop"
+        >
+          <div
+            v-show="ball.show"
+            class="ball"
+          >
+            <div class="inner inner-hook" />
           </div>
         </transition>
       </div>
@@ -36,7 +71,7 @@ const BALL_LEN = 10
 const innerClsHook = 'inner-hook'
 
 function createBalls() {
-  let balls = []
+  const balls = []
   for (let i = 0; i < BALL_LEN; i++) {
     balls.push({ show: false })
   }
@@ -44,7 +79,7 @@ function createBalls() {
 }
 
 export default {
-  name: 'shop-cart',
+  name: 'ShopCart',
   components: {
     Bubble
   },
@@ -80,9 +115,6 @@ export default {
       listFold: this.fold
     }
   },
-  created() {
-    this.dropBalls = []
-  },
   computed: {
     totalPrice() {
       let total = 0
@@ -102,7 +134,7 @@ export default {
       if (this.totalPrice === 0) {
         return `￥${this.minPrice}元起送`
       } else if (this.totalPrice < this.minPrice) {
-        let diff = this.minPrice - this.totalPrice
+        const diff = this.minPrice - this.totalPrice
         return `还差￥${diff}元起送`
       } else {
         return '去结算'
@@ -115,6 +147,21 @@ export default {
         return 'enough'
       }
     }
+  },
+  watch: {
+    // 根据 fold 作改变
+    fold(newVal) {
+      this.listFold = newVal
+    },
+    totalCount(count) {
+      // 购物车列表展开的情况 价格为 0
+      if (!this.fold && count === 0) {
+        this._hideShopCartList()
+      }
+    }
+  },
+  created() {
+    this.dropBalls = []
   },
   methods: {
     pay(e) {
@@ -218,18 +265,6 @@ export default {
     },
     _hideShopCartSticky() {
       this.shopCartStickyComp.hide()
-    }
-  },
-  watch: {
-    // 根据 fold 作改变
-    fold(newVal) {
-      this.listFold = newVal
-    },
-    totalCount(count) {
-      // 购物车列表展开的情况 价格为 0
-      if (!this.fold && count === 0) {
-        this._hideShopCartList()
-      }
     }
   }
 }

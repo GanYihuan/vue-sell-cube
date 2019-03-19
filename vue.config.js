@@ -5,7 +5,7 @@ const seller = appData.seller
 const goods = appData.goods
 const ratings = appData.ratings
 
-// 去console插件
+// 去 console 插件
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 // gzip压缩插件
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
@@ -33,7 +33,7 @@ module.exports = {
   productionSourceMap: false,
   // webpack配置
   configureWebpack: config => {
-    let plugins = [
+    const plugins = [
       new UglifyJsPlugin({
         uglifyOptions: {
           compress: {

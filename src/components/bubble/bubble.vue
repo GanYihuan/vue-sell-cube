@@ -1,10 +1,10 @@
 <template>
-  <span class="bubble">{{num}}</span>
+  <span class="bubble">{{ num }}</span>
 </template>
 
 <script>
 export default {
-  name: 'bubble',
+  name: 'Bubble',
   props: {
     num: {
       type: Number,

@@ -1,16 +1,21 @@
 <template>
-  <span class="support-ico" :class="iconCls"></span>
+  <span
+    class="support-ico"
+    :class="iconCls"
+  />
 </template>
 
 <script>
 export default {
-  name: 'support-ico',
+  name: 'SupportIco',
   props: {
     size: {
-      type: Number
+      type: Number,
+      default: 0
     },
     type: {
-      type: Number
+      type: Number,
+      default: 0
     }
   },
   computed: {

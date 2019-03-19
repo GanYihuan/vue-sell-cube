@@ -1,8 +1,16 @@
 <template>
   <div class="goods">
     <div class="scroll-nav-wrapper">
-      <cube-scroll-nav side :data="goods" :options="scrollOptions" v-if="goods.length">
-        <template slot="bar" slot-scope="props">
+      <cube-scroll-nav
+        v-if="goods.length"
+        side
+        :data="goods"
+        :options="scrollOptions"
+      >
+        <template
+          slot="bar"
+          slot-scope="props"
+        >
           <cube-scroll-nav-bar
             direction="vertical"
             :labels="props.labels"
@@ -11,10 +19,17 @@
           >
             <template slot-scope="props">
               <div class="text">
-                <support-ico v-if="props.txt.type>=1" :size="3" :type="props.txt.type"/>
-                <span>{{props.txt.name}}</span>
-                <span class="num" v-if="props.txt.count">
-                  <bubble :num="props.txt.count"/>
+                <support-ico
+                  v-if="props.txt.type>=1"
+                  :size="3"
+                  :type="props.txt.type"
+                />
+                <span>{{ props.txt.name }}</span>
+                <span
+                  v-if="props.txt.count"
+                  class="num"
+                >
+                  <bubble :num="props.txt.count" />
                 </span>
               </div>
             </template>
@@ -34,21 +49,36 @@
               @click="selectFood(food)"
             >
               <div class="icon">
-                <img width="57" height="57" :src="food.icon" alt>
+                <img
+                  width="57"
+                  height="57"
+                  :src="food.icon"
+                  alt
+                >
               </div>
               <div class="content">
-                <h2 class="name">{{food.name}}</h2>
-                <p class="desc">{{food.description}}</p>
+                <h2 class="name">
+                  {{ food.name }}
+                </h2>
+                <p class="desc">
+                  {{ food.description }}
+                </p>
                 <div class="extra">
-                  <span class="count">月售{{food.sellCount}}份</span>
-                  <span>好评率{{food.rating}}%</span>
+                  <span class="count">月售{{ food.sellCount }}份</span>
+                  <span>好评率{{ food.rating }}%</span>
                 </div>
                 <div class="price">
-                  <span class="now">￥{{food.price}}</span>
-                  <span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
+                  <span class="now">￥{{ food.price }}</span>
+                  <span
+                    v-show="food.oldPrice"
+                    class="old"
+                  >￥{{ food.oldPrice }}</span>
                 </div>
                 <div class="cart-control-wrapper">
-                  <cart-control @add="onAdd" :food="food"/>
+                  <cart-control
+                    :food="food"
+                    @add="onAdd"
+                  />
                 </div>
               </div>
             </li>
@@ -76,7 +106,7 @@ import Bubble from 'components/bubble/bubble'
 import ApiServer from 'api'
 
 export default {
-  name: 'goods',
+  name: 'Goods',
   components: {
     Bubble,
     SupportIco,
@@ -84,9 +114,11 @@ export default {
     ShopCart
   },
   props: {
-    data: Object,
-    default() {
-      return {}
+    data: {
+      type: Object,
+      default() {
+        return {}
+      }
     }
   },
   data() {
@@ -94,8 +126,7 @@ export default {
       goods: [],
       selectedFood: {},
       scrollOptions: {
-        // 造成点击两次
-        click: false,
+        click: false, // 造成点击两次
         directionLockThreshold: 0
       }
     }
@@ -105,7 +136,7 @@ export default {
       return this.data.seller
     },
     selectFoods() {
-      let foods = []
+      const foods = []
       this.goods.forEach(good => {
         good.foods.forEach(food => {
           if (food.count) {
@@ -116,7 +147,7 @@ export default {
       return foods
     },
     barTxts() {
-      let ret = []
+      const ret = []
       this.goods.forEach(good => {
         const { type, name, foods } = good
         let count = 0
@@ -136,14 +167,14 @@ export default {
     fetch() {
       if (!this.fetched) {
         this.fetched = true
-        let params = {
+        const params = {
           id: this.seller.id
         }
         ApiServer.getGoods(params)
           .then(res => {
             this.goods = res
           })
-          .catch(err => {})
+          .catch(err => { console.log(err) })
       }
     },
     selectFood(food) {
