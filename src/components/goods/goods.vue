@@ -132,7 +132,7 @@ export default {
       goods: [],
       selectedFood: {},
       scrollOptions: {
-        click: false, // 造成点击两次
+        click: false, // Cause clicks twice
         directionLockThreshold: 0
       }
     }
@@ -209,7 +209,7 @@ export default {
         })
       this.foodComp.show()
     },
-    _showShopCartSticky() { // 显示购物车浮层
+    _showShopCartSticky() { // Show shopping cart float layer
       this.shopCartStickyComp =
         this.shopCartStickyComp ||
         this.$createShopCartSticky({

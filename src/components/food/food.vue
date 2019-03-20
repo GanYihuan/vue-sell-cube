@@ -118,7 +118,7 @@
 </template>
 
 <script>
-import moment from 'moment'
+import moment from 'moment' // Time formatting
 import CartControl from 'components/cart-control/cart-control'
 import RatingSelect from 'components/rating-select/rating-select'
 import Split from 'components/split/split'

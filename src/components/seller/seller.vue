@@ -131,9 +131,11 @@ export default {
     SupportIco
   },
   props: {
-    data: Object,
-    default() {
-      return {}
+    data: {
+      type: Object,
+      default() {
+        return {}
+      }
     }
   },
   data() {
