@@ -15,9 +15,9 @@
           slot="bar"
           slot-scope="props"
         >
-          <!-- labels 所有的 key 值集合 -->
-          <!-- txts 显示所有文案集合，和 labels 一一对应，每项可以是 HTML 字符串 -->
-          <!-- current 当前 active 的 key 值 -->
+          <!-- labels: all key collect -->
+          <!-- txts: Show all copy collections, One-to-one correspondence with labels, Each item can be an HTML word -->
+          <!-- current: Current active key value -->
           <cube-scroll-nav-bar
             direction="vertical"
             :labels="props.labels"
@@ -42,8 +42,8 @@
             </template>
           </cube-scroll-nav-bar>
         </template>
-        <!-- label 必须，面板的唯一标示的值 -->
-        <!-- title 面板标题内容，可以是 HTML 字符串 -->
+        <!-- label: Current active key value -->
+        <!-- title: Panel title content, Can be an HTML string -->
         <cube-scroll-nav-panel
           v-for="good in goods"
           :key="good.name"
