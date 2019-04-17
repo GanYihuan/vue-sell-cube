@@ -1,9 +1,10 @@
 <template>
   <transition name="fade">
-    <!-- mask 是否显示背景层 -->
-    <!-- position 内容展示位置，优先级比 center 高 -->
-    <!-- type 弹层类型 -->
-    <!-- @mask-click 背景层点击 -->
+    <!-- mask: Whether to display the background layer -->
+    <!-- position: Content placement, Priority ratio center higher -->
+    <!-- type: Shell type -->
+    <!-- @mask-click: Background layer click -->
+    <!-- [cube-popup](https://didi.github.io/cube-ui/#/zh-CN/docs/popup) -->
     <cube-popup
       v-show="visible"
       mask-closable
@@ -78,7 +79,7 @@ export default {
     }
   },
   created() {
-    this.$on(EVENT_SHOW, () => { // 购物车列表显示刷新滚动
+    this.$on(EVENT_SHOW, () => { // Shopping cart list shows refresh scroll
       this.$nextTick(() => {
         this.$refs.listContent.refresh()
       })

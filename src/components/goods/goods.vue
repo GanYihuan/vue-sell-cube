@@ -1,7 +1,10 @@
 <template>
   <div class="goods">
     <div class="scroll-nav-wrapper">
-      <!-- side 是否是侧边样式 -->
+      <!-- side: Is it a side style? -->
+      <!-- current: Current navigation active key -->
+      <!-- speed: Click navigation to switch to the specified location speed -->
+      <!-- [cube-scroll-nav](https://didi.github.io/cube-ui/#/zh-CN/docs/scroll-nav) -->
       <cube-scroll-nav
         v-if="goods.length"
         side
@@ -108,7 +111,6 @@ import CartControl from 'components/cart-control/cart-control'
 import ShopCart from 'components/shop-cart/shop-cart'
 import SupportIco from 'components/support-ico/support-ico'
 import Bubble from 'components/bubble/bubble'
-
 import ApiServer from 'api'
 
 export default {
@@ -192,34 +194,30 @@ export default {
       this.$refs.shopCart.drop(target) // target -> dom
     },
     _showFood() {
-      this.foodComp =
-        this.foodComp ||
-        this.$createFood({
-          $props: {
-            food: 'selectedFood'
+      this.foodComp = this.foodComp || this.$createFood({
+        $props: {
+          food: 'selectedFood'
+        },
+        $events: {
+          add: target => {
+            this.shopCartStickyComp.drop(target)
           },
-          $events: {
-            add: target => {
-              this.shopCartStickyComp.drop(target)
-            },
-            leave: () => {
-              this._hideShopCartSticky()
-            }
+          leave: () => {
+            this._hideShopCartSticky()
           }
-        })
+        }
+      })
       this.foodComp.show()
     },
     _showShopCartSticky() { // Show shopping cart float layer
-      this.shopCartStickyComp =
-        this.shopCartStickyComp ||
-        this.$createShopCartSticky({
-          $props: {
-            selectFoods: 'selectFoods',
-            deliveryPrice: this.seller.deliveryPrice,
-            minPrice: this.seller.minPrice,
-            fold: true
-          }
-        })
+      this.shopCartStickyComp = this.shopCartStickyComp || this.$createShopCartSticky({
+        $props: {
+          selectFoods: 'selectFoods',
+          deliveryPrice: this.seller.deliveryPrice,
+          minPrice: this.seller.minPrice,
+          fold: true
+        }
+      })
       this.shopCartStickyComp.show()
     },
     _hideShopCartSticky() {

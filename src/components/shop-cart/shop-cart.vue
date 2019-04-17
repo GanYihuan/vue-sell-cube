@@ -148,11 +148,11 @@ export default {
     }
   },
   watch: {
-    fold(newVal) { // 根据 fold 作改变
+    fold(newVal) {
       this.listFold = newVal
     },
     totalCount(count) {
-      if (!this.fold && count === 0) { // 购物车列表展开的情况 价格为 0
+      if (!this.fold && count === 0) {
         this._hideShopCartList()
       }
     }
@@ -204,7 +204,7 @@ export default {
         el.style.display = 'none'
       }
     },
-    toggleList() { // 切换购物车列表
+    toggleList() {
       if (this.listFold) {
         if (!this.totalCount) return
         this.listFold = false
@@ -216,24 +216,22 @@ export default {
       }
     },
     _showShopCartList() { // Show shopping cart list
-      this.shopCartListComp =
-        this.shopCartListComp ||
-        this.$createShopCartList({
-          $props: {
-            selectFoods: 'selectFoods'
+      this.shopCartListComp = this.shopCartListComp || this.$createShopCartList({
+        $props: {
+          selectFoods: 'selectFoods'
+        },
+        $events: {
+          leave: () => {
+            this._hideShopCartSticky()
           },
-          $events: {
-            leave: () => {
-              this._hideShopCartSticky()
-            },
-            hide: () => {
-              this.listFold = true
-            },
-            add: el => {
-              this.shopCartStickyComp.drop(el)
-            }
+          hide: () => {
+            this.listFold = true
+          },
+          add: el => {
+            this.shopCartStickyComp.drop(el)
           }
-        })
+        }
+      })
       this.shopCartListComp.show()
     },
     _hideShopCartList() {
@@ -241,17 +239,15 @@ export default {
       list.hide && list.hide()
     },
     _showShopCartSticky() { // Show shopping cart float layer
-      this.shopCartStickyComp =
-        this.shopCartStickyComp ||
-        this.$createShopCartSticky({
-          $props: {
-            selectFoods: 'selectFoods',
-            deliveryPrice: 'deliveryPrice',
-            minPrice: 'minPrice',
-            fold: 'listFold',
-            list: this.shopCartListComp
-          }
-        })
+      this.shopCartStickyComp = this.shopCartStickyComp || this.$createShopCartSticky({
+        $props: {
+          selectFoods: 'selectFoods',
+          deliveryPrice: 'deliveryPrice',
+          minPrice: 'minPrice',
+          fold: 'listFold',
+          list: this.shopCartListComp
+        }
+      })
       this.shopCartStickyComp.show()
     },
     _hideShopCartSticky() {

@@ -38,7 +38,7 @@ export default {
   methods: {
     add(event) {
       if (!this.food.count) {
-        this.$set(this.food, 'count', 1) // 向对象中添加一个属性，并确保这个新属性同样是响应式的，且触发视图更新。
+        this.$set(this.food, 'count', 1) // Add an attribute to the object, And make sure this new property is also responsive and triggers a view update., And trigger the view update.
       } else {
         this.food.count++
       }
