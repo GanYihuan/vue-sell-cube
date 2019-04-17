@@ -73,14 +73,11 @@ export default {
   },
   methods: {
     showDetail() {
-      // cube-ui 的 create-api 把 headerdetail 组件变成了 api 实例,所以可以这样实例调用 this.$createHeaderDetail
-      this.headerDetailComp =
-        this.headerDetailComp ||
-        this.$createHeaderDetail({
-          $props: {
-            seller: 'seller'
-          }
-        })
+      this.headerDetailComp = this.headerDetailComp || this.$createHeaderDetail({ // cube-ui: create-api change header-detail.vue component become api instance, invoked header-detail
+        $props: {
+          seller: 'seller'
+        }
+      })
       this.headerDetailComp.show()
     }
   }
