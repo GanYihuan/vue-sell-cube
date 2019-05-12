@@ -18,6 +18,7 @@ import Ratings from 'components/ratings/ratings'
 import Seller from 'components/seller/seller'
 import qs from 'qs'
 import ApiServer from 'api'
+// import { getSeller } from 'api'
 
 export default {
   name: 'App',
@@ -30,6 +31,7 @@ export default {
       seller: {
         id: qs.parse(location.search.slice(1)).id
       }
+      // seller: {}
     }
   },
   computed: {
@@ -73,6 +75,11 @@ export default {
         })
         .catch(err => { console.log(err) })
     }
+    // _getSeller() {
+    //   getSeller().then((seller) => {
+    //     this.seller = seller
+    //   })
+    // }
   }
 }
 </script>

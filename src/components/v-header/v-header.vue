@@ -72,6 +72,7 @@ export default {
     }
   },
   methods: {
+    // header-detail.vue 全屏弹窗放到 body 里最优
     showDetail() {
       this.headerDetailComp = this.headerDetailComp || this.$createHeaderDetail({ // cube-ui: create-api change header-detail.vue component become api instance, invoked header-detail
         $props: {
