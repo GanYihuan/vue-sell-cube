@@ -90,12 +90,22 @@ export default {
     this.onChange(this.index)
   },
   methods: {
+    /**
+     * @description: 横向滚动
+     * @param {type} pos 位置信息
+     * @return:
+     */
     onScroll(pos) {
       const tabBarWidth = this.$refs.tabBar.$el.clientWidth
       const slideWidth = this.$refs.slide.slide.scrollerWidth // slide: better-scroll obj
       const transform = (-pos.x / slideWidth) * tabBarWidth // pos.x slideOptions Configured to get
       this.$refs.tabBar.setSliderTransform(transform)
     },
+    /**
+     * @description: 切换不同项时触发
+     * @param {type} current 当前项的索引
+     * @return:
+     */
     onChange(current) {
       this.index = current
       const instance = this.$refs.component[current]
