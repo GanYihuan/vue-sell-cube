@@ -78,6 +78,7 @@ export default {
     // _getSeller() {
     //   getSeller().then((seller) => {
     //     this.seller = seller
+    //     console.log(this.seller, '--seller')
     //   })
     // }
   }

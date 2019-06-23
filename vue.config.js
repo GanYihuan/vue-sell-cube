@@ -83,7 +83,7 @@ module.exports = {
   devServer: {
     open: true, // 打开浏览器
     host: '0.0.0.0',
-    port: 8081,
+    port: 8082,
     https: false,
     hotOnly: false,
     proxy: null, // 设置代理
