@@ -16,7 +16,7 @@ import Tab from 'components/tab/tab'
 import Goods from 'components/goods/goods'
 import Ratings from 'components/ratings/ratings'
 import Seller from 'components/seller/seller'
-import qs from 'qs'
+import qs from 'query-string'
 import ApiServer from 'api'
 // import { getSeller } from 'api'
 
